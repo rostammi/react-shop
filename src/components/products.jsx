@@ -3,18 +3,19 @@ import Product from "./product";
 
 class Products extends Component {
   render() {
-    const { products, onDelete, onIncrement, onDecrement } = this.props;
+    const { products, onIncrement, onDecrement } = this.props;
     return (
       <React.Fragment>
-        {products.map(product => (
-          <Product
-            product={product}
-            onDelete={onDelete}
-            onIncrement={onIncrement}
-            onDecrement={onDecrement}
-            key={product.id}
-          />
-        ))}
+        <div className="card-deck">
+          {products.map(product => (
+            <Product
+              product={product}
+              onIncrement={onIncrement}
+              onDecrement={onDecrement}
+              key={product.id}
+            />
+          ))}
+        </div>
       </React.Fragment>
     );
   }

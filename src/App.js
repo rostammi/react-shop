@@ -72,10 +72,14 @@ class App extends Component {
     this.setState({ products });
   };
 
-  // handleDelete = counterId => {
-  //   const counters = this.state.counters.filter(c => c.id !== counterId);
-  //   this.setState({ counters });
-  // };
+  handleDelete = product => {
+    const products = [...this.state.products];
+    const index = products.indexOf(product);
+    products[index] = { ...product };
+    products[index].value = 0;
+    this.setState({ products });
+  };
+
   handleReset = () => {
     const products = this.state.products.map(p => {
       p.value = 0;
@@ -90,15 +94,9 @@ class App extends Component {
         <NavBar
           totalCounters={this.state.products.filter(c => c.value > 0).length}
           productList={this.state.products.filter(p => p.value > 0)}
+          onDelete={this.handleDelete}
         />
         <main className="container">
-          <Counters
-            onReset={this.handleReset}
-            onIncrement={this.handleIncrement}
-            onDecrement={this.handleDecrement}
-            onDelete={this.handleDelete}
-            products={this.state.products}
-          />
           <Products
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}

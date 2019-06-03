@@ -3,12 +3,9 @@ import Counter from "./counter";
 
 class Product extends Component {
   render() {
-    const cardStyle = {
-      width: "18rem"
-    };
-    const { product, onDelete, onIncrement, onDecrement } = this.props;
+    const { product, onIncrement } = this.props;
     return (
-      <div className="card" style={cardStyle}>
+      <div className="card">
         <img
           src={product.imageUrl}
           className="card-img-top"
@@ -21,7 +18,7 @@ class Product extends Component {
             {this.getDeleteButtonText()}
             <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
             <button
-              onClick={() => this.props.onIncrement(this.props.product)}
+              onClick={() => onIncrement(this.props.product)}
               className="btn btn-secondary btn-sm m-2"
             >
               {this.getAddButtonText()}
