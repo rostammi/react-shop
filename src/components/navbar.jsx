@@ -3,16 +3,19 @@ import Basket from "./basket";
 
 class NavBar extends Component {
   render() {
-    const { totalCounters, productList, onDelete } = this.props;
+    const {
+      totalCounters,
+      productList,
+      onDelete,
+      checkout,
+      gotoHome
+    } = this.props;
 
     return (
       <nav className="navbar navbar-light bg-light">
-        <a className="navbar-brand" href="#">
-          Basket
-          <span className="badge badge-pill badge-secondary m-2">
-            {totalCounters}
-          </span>
-        </a>
+        <button onClick={gotoHome} type="button" className="btn btn-secondary">
+          Home
+        </button>
 
         <button
           type="button"
@@ -20,10 +23,14 @@ class NavBar extends Component {
           data-toggle="modal"
           data-target="#exampleModal"
         >
-          Show Basket Items
+          Basket {totalCounters}
         </button>
 
-        <Basket onDelete={onDelete} productList={productList} />
+        <Basket
+          onDelete={onDelete}
+          productList={productList}
+          checkout={checkout}
+        />
       </nav>
     );
   }

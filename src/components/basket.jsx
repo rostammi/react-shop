@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-const Basket = ({ productList, onDelete }) => {
+const Basket = ({ productList, onDelete, checkout }) => {
   // class Basket extends Component {
   //   render() {
   const basketImage = {
@@ -34,26 +34,34 @@ const Basket = ({ productList, onDelete }) => {
             </button>
           </div>
           <div className="modal-body">
-            <ul className="list-group">
-              {productList.map(p => (
-                <li
-                  key={p.id}
-                  className="list-group-item d-flex justify-content-between align-items-center"
-                >
-                  {p.name}
-                  <img style={basketImage} className="mr-3" src={p.imageUrl} />
-                  <span className="badge badge-primary badge-pill">
-                    {p.value}
-                  </span>
-                  <span
-                    onClick={() => onDelete(p)}
-                    className="badge badge-secondary badge-pill"
+            {productList.length ? (
+              <ul className="list-group">
+                {productList.map(p => (
+                  <li
+                    key={p.id}
+                    className="list-group-item d-flex justify-content-between align-items-center"
                   >
-                    x
-                  </span>
-                </li>
-              ))}
-            </ul>
+                    {p.name}
+                    <img
+                      style={basketImage}
+                      className="mr-3"
+                      src={p.imageUrl}
+                    />
+                    <span className="badge badge-primary badge-pill">
+                      {p.value}
+                    </span>
+                    <span
+                      onClick={() => onDelete(p)}
+                      className="badge badge-secondary badge-pill"
+                    >
+                      x
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <span className="btn m2">Empty Bakset</span>
+            )}
           </div>
           <div className="modal-footer">
             <button
@@ -63,7 +71,12 @@ const Basket = ({ productList, onDelete }) => {
             >
               Close
             </button>
-            <button type="button" className="btn btn-primary">
+            <button
+              onClick={checkout}
+              type="button"
+              className="btn btn-primary"
+              data-dismiss="modal"
+            >
               Checkout
             </button>
           </div>

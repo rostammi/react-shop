@@ -3,13 +3,14 @@ import Counter from "./counter";
 
 class Product extends Component {
   render() {
-    const { product, onIncrement } = this.props;
+    const { product, onIncrement, showProduct } = this.props;
     return (
       <div className="card">
         <img
           src={product.imageUrl}
           className="card-img-top"
           alt={product.name}
+          onClick={() => showProduct(product)}
         />
         <div className="card-body">
           <h5 className="card-title">Product ID: {product.id}</h5>

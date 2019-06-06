@@ -3,7 +3,13 @@ import Product from "./product";
 
 class Products extends Component {
   render() {
-    const { products, onIncrement, onDecrement } = this.props;
+    const {
+      products,
+      onIncrement,
+      onDecrement,
+      showProduct,
+      showList
+    } = this.props;
     return (
       <React.Fragment>
         <div className="card-deck">
@@ -12,6 +18,8 @@ class Products extends Component {
               product={product}
               onIncrement={onIncrement}
               onDecrement={onDecrement}
+              showProduct={showProduct}
+              showList={showList}
               key={product.id}
             />
           ))}
