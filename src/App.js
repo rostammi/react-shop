@@ -8,47 +8,9 @@ import Checkout from "./components/checkout";
 
 class App extends Component {
   state = {
-    data: [],
     checkout: false,
     view_product: [],
-    products: [
-      {
-        id: 1,
-        name: "Product One",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      },
-      {
-        id: 2,
-        name: "Product Two",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      },
-      {
-        id: 3,
-        name: "Product Three",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      },
-      {
-        id: 4,
-        name: "Product Four",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      },
-      {
-        id: 5,
-        name: "Product Five",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      },
-      {
-        id: 6,
-        name: "Product Six",
-        imageUrl: "https://picsum.photos/200",
-        value: 0
-      }
-    ]
+    products: []
   };
 
   constructor() {
@@ -56,16 +18,11 @@ class App extends Component {
     //this.state = something
   }
 
-  async componentDidMount() {
+  componentDidMount() {
     try {
-      const response = await fetch(
-        `https://api.coinmarketcap.com/v1/ticker/?limit=10`
-      );
-      if (!response.ok) {
-        throw Error(response.statusText);
-      }
-      const json = await response.json();
-      this.setState({ data: json });
+      fetch("http://localhost:4000/api/products/")
+        .then(response => response.json())
+        .then(data => this.setState({ products: data }));
     } catch (error) {
       console.log(error);
     }
@@ -130,13 +87,6 @@ class App extends Component {
           gotoHome={this.handleGotoHome}
         />
         <main className="container">
-          <ul>
-            {this.state.data.map(el => (
-              <li>
-                {el.name}: {el.price_usd}
-              </li>
-            ))}
-          </ul>
           {this.state.checkout ? (
             <Checkout
               productList={this.state.products.filter(p => p.value > 0)}
